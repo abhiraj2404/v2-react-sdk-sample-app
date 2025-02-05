@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useOkto, evmRawTransaction, Address } from "@okto_web3/react-sdk";
+import { useNavigate } from "react-router-dom";
 
 function EVMRawTransaction() {
   const oktoClient = useOkto();
@@ -14,6 +15,7 @@ function EVMRawTransaction() {
   const [editableUserOp, setEditableUserOp] = useState<string>("");
   const [responseMessage, setResponseMessage] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const navigate = useNavigate();
 
   const handleCreateUserOp = async () => {
     try {
@@ -117,12 +119,15 @@ function EVMRawTransaction() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-6 md:p-12 bg-gray-900 w-full">
-       <a
-              href="/home"
-              className="w-fit py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black mb-8">
-              Home
-            </a>
-      <h1 className="text-white font-bold text-3xl mb-8">EVM Raw Transaction</h1>
+      <button
+        onClick={() => navigate("/home")}
+        className="w-fit py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black mb-8"
+      >
+        Home
+      </button>
+      <h1 className="text-white font-bold text-3xl mb-8">
+        EVM Raw Transaction
+      </h1>
       <div className="flex flex-col gap-4 w-full max-w-2xl">
         <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-xl border border-gray-800">
           <input

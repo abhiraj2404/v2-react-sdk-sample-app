@@ -61,24 +61,24 @@ export default function Homepage() {
         <div className="bg-white rounded-xl shadow-lg border border-violet-200 p-6">
           <h2 className="text-violet-900 font-semibold text-2xl mb-6">Intents</h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/transfertoken"
+            <button
+              onClick={() => navigate('/transfertoken')}
               className="px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-center font-medium"
             >
               Transfer Token
-            </a>
-            <a
-              href="/transfernft"
+            </button>
+            <button
+              onClick={() => navigate('/transfernft')}
               className="px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-center font-medium"
             >
               Transfer NFT
-            </a>
-            <a
-              href="/rawtransaction"
+            </button>
+            <button
+              onClick={() => navigate('/rawtransaction')}
               className="px-6 py-3 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-center font-medium"
             >
               Raw Transaction
-            </a>
+            </button>
           </div>
         </div>
       </div>

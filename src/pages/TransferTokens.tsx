@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Address, tokenTransfer, useOkto } from "@okto_web3/react-sdk";
+import { useNavigate } from "react-router-dom";
 
 function TransferTokens() {
   const oktoClient = useOkto();
@@ -13,6 +14,7 @@ function TransferTokens() {
   const [modalMessage, setModalMessage] = useState("");
   const [userOp, setUserOp] = useState<any | null>(null);
   const [userOpString, setUserOpString] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -54,11 +56,12 @@ function TransferTokens() {
 
   return (
     <main className="flex min-h-screen flex-col items-center p-6 md:p-12 bg-gray-900 w-full">
-       <a
-              href="/home"
-              className="w-fit py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black mb-8">
-              Home
-            </a>
+      <button
+        onClick={() => navigate("/home")}
+        className="w-fit py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-black mb-8"
+      >
+        Home
+      </button>
       <h1 className="text-white font-bold text-3xl mb-8">Transfer Tokens</h1>
       <div className="flex flex-col gap-4 w-full max-w-2xl">
         <div className="flex flex-col items-center bg-black p-6 rounded-lg shadow-xl border border-gray-800">

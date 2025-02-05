@@ -78,9 +78,12 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <a href="/home" 
-              className="px-6 py-3 mt-4 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-center font-medium"
-            >Go to homepage</a>
+      <button 
+        onClick={() => navigate("/home")} 
+        className="px-6 py-3 mt-4 bg-violet-600 text-white rounded-lg hover:bg-violet-700 transition-colors text-center font-medium"
+      >
+        Go to homepage
+      </button>
     </main>
   );
 }
