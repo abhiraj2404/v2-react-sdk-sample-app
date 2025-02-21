@@ -54,6 +54,7 @@ export default function LoginPage() {
   const handleGoogleLogin = async (credentialResponse: any) => {
     const idToken = credentialResponse.credential || "";
     if (idToken) {
+      console.log("google idToken", idToken);
       localStorage.setItem('googleIdToken', idToken);
       handleAuthenticate(idToken);
     }
