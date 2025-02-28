@@ -1,4 +1,3 @@
-import GetButton from "./components/GetButton";
 import {
   getAccount,
   getChains,
@@ -11,25 +10,34 @@ import {
 } from "@okto_web3/react-sdk";
 import { googleLogout } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
+import GetButton from "./components/GetButton";
 
 export default function Homepage() {
   const oktoClient = useOkto();
   const navigate = useNavigate();
   const isloggedIn = oktoClient.isLoggedIn();
-  const envconfig = oktoClient.env;
   const userSWA = oktoClient.userSWA;
+  const clientSWA = oktoClient.clientSWA;
 
   // handles user logout process
   async function handleLogout() {
     try {
       // Perform Google OAuth logout and remove stored token
       googleLogout();
+      oktoClient.sessionClear();
       localStorage.removeItem("googleIdToken");
       navigate("/");
       return { result: "logout success" };
     } catch (error) {
+      console.error("Logout failed:", error);
       return { result: "logout failed" };
     }
+  }
+
+  async function getSessionInfo() {
+    const session = localStorage.getItem("okto_session");
+    const sessionInfo = JSON.parse(session || "{}");
+    return { result: sessionInfo };
   }
 
   return (
@@ -39,17 +47,27 @@ export default function Homepage() {
           Okto v2 SDK Demo
         </h1>
 
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           <h2 className="text-violet-900 font-bold text-2xl">Env Config</h2>
           <pre className="whitespace-pre-wrap break-words bg-white p-6 rounded-xl text-gray-800 w-full border border-violet-200 shadow-lg">
             {isloggedIn ? JSON.stringify(envconfig, null, 2) : "not signed in"}
           </pre>
-        </div>
+        </div> */}
         <div className="space-y-4">
           <h2 className="text-violet-900 font-bold text-2xl">User Details</h2>
           <pre className="whitespace-pre-wrap break-words bg-white p-6 rounded-xl text-gray-800 w-full border border-violet-200 shadow-lg">
-            {isloggedIn ? `Logged in. userSWA: ${userSWA}` : "not signed in"}
+            {isloggedIn ? `Logged in \n userSWA: ${userSWA} \n clientSWA: ${clientSWA}` : "not signed in"}
           </pre>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-lg border border-violet-200 p-6 mb-8">
+          <h2 className="text-violet-900 font-semibold text-2xl mb-6">
+            Session
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <GetButton title="Okto Log out" apiFn={handleLogout} />
+            <GetButton title="Show Session Info" apiFn={getSessionInfo} />
+          </div>
         </div>
 
         <div className="bg-white rounded-xl shadow-lg border border-violet-200 p-6 mb-8">
