@@ -75,7 +75,6 @@ export default function Homepage() {
             Explorer Functions
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <GetButton title="Okto Log out" apiFn={handleLogout} />
             <GetButton title="getAccount" apiFn={getAccount} />
             <GetButton title="getChains" apiFn={getChains} />
             <GetButton title="getOrdersHistory" apiFn={getOrdersHistory} />
